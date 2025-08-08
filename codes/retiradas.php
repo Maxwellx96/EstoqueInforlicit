@@ -1,27 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json');
-
-// Caminho do banco Access (.accdb)
-$db_path = realpath('//192.168.1.200/SHOficina/Estoque.accdb');
-
-if (!$db_path) {
-    echo json_encode(['erro' => 'Arquivo ACCDB não encontrado.']);
-    exit;
-}
-
-$dsn = "odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$db_path;";
+require("conn_ret.php");
 
 try {
     $conn = new PDO($dsn);
     $conn->setAttribute(attribute: PDO::ATTR_ERRMODE, value: PDO::ERRMODE_EXCEPTION);
 
-    $meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    $dataAtual = date('j');
-    $mesNome = $meses[$dataAtual - 1];
-
     // Ajuste para os nomes reais da sua tabela
-    $sql = "SELECT * FROM Log WHERE mes = '$mesNome' ORDER BY Data Desc"; 
+    $sql = "SELECT * FROM Log"; 
     $stmt = $conn->query($sql);
     $produtos = [];
 
@@ -44,6 +29,8 @@ try {
         'Serial' => $row['Serial']
     ];
 }
+
+
     echo json_encode($produtos);
 
 } catch (PDOException $e) {

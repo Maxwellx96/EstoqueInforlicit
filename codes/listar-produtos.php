@@ -1,17 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json');
-
-// Caminho do banco Access (.accdb)
-$db_path = realpath('//192.168.1.200/SHOficina/Dados.mdb');
-$db_pwd = '!(&&!!)&';
-
-if (!$db_path) {
-    echo json_encode(['erro' => 'Arquivo ACCDB não encontrado.']);
-    exit;
-}
-
-$dsn = "odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=$db_path;PWD=$db_pwd;";
+require("conn.php");
 
 try {
     $conn = new PDO($dsn);
