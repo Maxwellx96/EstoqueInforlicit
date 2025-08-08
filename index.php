@@ -34,13 +34,13 @@
       <input type="text" class="form-control" name="codColaborador">
 
       <label>Colaborador</label>
-      <input type="text" class="form-control" name="colaborador" disabled>
+      <input type="text" class="form-control" name="colaborador">
 
       <label>Cód. Produto</label>
       <input type="text" class="form-control" name="codProduto">
 
       <label>Produto</label>
-      <input type="text" class="form-control" name="produto" disabled>
+      <input type="text" class="form-control" name="produto">
 
       <label>Quantidade</label>
       <input type="number" class="form-control" name="quantidade" min="1" value="1">
@@ -81,65 +81,8 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    carregarProdutos();
-     });
-
-  let todosProdutos = []; // Mantém a lista completa em memória
-    
-function carregarProdutos(tentativa = 1) {
-  fetch("codes/retiradas.php")
-    .then(res => res.json())
-    .then(data => {
-      if (data.erro) {
-        console.error("Erro:", data.erro);
-        alert("Erro ao carregar dados: " + data.erro);
-        return;
-      }
-
-      todosProdutos = data;
-      renderTabela(todosProdutos);
-    })
-    .catch(err => {
-      console.error(`Erro de rede (tentativa ${tentativa}):`, err);
-
-      if (tentativa < 5) { // número máximo de tentativas
-        console.log("Tentando novamente em 3 segundos...");
-        setTimeout(() => carregarProdutos(tentativa + 1), 3000);
-      } else {
-        alert("Não foi possível carregar os dados após várias tentativas.");
-      }
-    });
-}
-
-
-  function renderTabela(lista) {
-    const tbody = document.getElementById("tabela-retiradas");
-    tbody.innerHTML = "";
-
-    lista.forEach(prod => {
-      tbody.innerHTML += `
-        <tr style='text-align:center'>
-          <td>${prod.Data}</td>
-          <td>${prod.Colaborador}</td>
-          <td style='text-align:left'>${prod.Nome}</td>
-          <td>${prod.Quantidade}</td>
-          <td>${prod.OrdemServico}</td>
-          <td>${prod.Serial}</td>
-        </tr>
-      `;
-    });
-  }
-
-</script>
-
-<script>
-  function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('active');
-  }
-</script>
-
+<script src="js/app_index.js"></script>
+<script src="js/sidebar.js"></script>
 
 </body>
 </html>
