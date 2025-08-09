@@ -30,9 +30,9 @@
     lista.forEach(prod => {
       tbody.innerHTML += `
         <tr style='text-align:center'>
-          <td>${prod.Data}</td>
+          <td>${prod.Data} - ${prod.Hora}</td>
           <td>${prod.Colaborador}</td>
-          <td>${prod.Nome}</td>
+          <td style='text-align:left'>${prod.Nome}</td>
           <td>${prod.Quantidade}</td>
           <td>${prod.OrdemServico}</td> 
           <td>${prod.Serial}</td> 

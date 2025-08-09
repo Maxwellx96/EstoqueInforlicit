@@ -23,13 +23,13 @@ try {
     $produtos[] = [
         'Nome' => $produtoNome,
         'Data' => $row['Data'],
+        'Hora' => $row['Hora'],
         'Colaborador' => $row['Colaborador'],
         'Quantidade' => $row['Quantidade'],
         'OrdemServico' => $row['OrdemServico'],
         'Serial' => $row['Serial']
     ];
 }
-
 
     echo json_encode($produtos);
 
